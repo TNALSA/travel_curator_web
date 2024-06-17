@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 import psycopg2
 
 from psycopg2.extras import RealDictCursor
-
+from .auth import get_db
 from .models import TravelPackage
 from . import db
 
@@ -57,13 +57,7 @@ def issue_coupon():
         return redirect(url_for('auth.login'))
     username = session['username']
 
-    conn = psycopg2.connect(
-        host='database-tour.cluster-ro-crln8mpfedqu.ap-northeast-2.rds.amazonaws.com',
-        dbname='postgres',
-        user='postgres',
-        password='lightening123$',
-        port=5432
-    )
+    conn = get_db()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     try:

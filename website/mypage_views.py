@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, session, redirect, url_for, reques
 from flask_login import login_required, current_user
 import psycopg2
 
+from .auth import get_db
 from psycopg2.extras import RealDictCursor
 
 from .models import User
@@ -27,19 +28,19 @@ def mypage():
 
 @mypage_views.route('/my_coupons')
 def my_coupons():
-    print("my-coupons")
     if 'username' not in session:
         return redirect(url_for('login'))
     username = session['username']
-    print("username is "+username)
 
-    conn = psycopg2.connect(
-        host='database-tour.cluster-ro-crln8mpfedqu.ap-northeast-2.rds.amazonaws.com',
-        dbname='postgres',
-        user='postgres',
-        password='lightening123$',
-        port=5432
-    )
+    conn = get_db()
+
+    # conn = psycopg2.connect(
+    #     host='database-tour.cluster-ro-crln8mpfedqu.ap-northeast-2.rds.amazonaws.com',
+    #     dbname='postgres',
+    #     user='postgres',
+    #     password='lightening123$',
+    #     port=5432
+    # )
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     try:
@@ -79,21 +80,6 @@ def my_coupons():
     return render_template('my_coupons.html', my_coupon_list = my_coupon_list)
 
 
-# @mypage_views.route('/my-coupons', methods=['GET'])
-# def my_coupons():
-#     # username = request.args.get('username')
-#     if 'username' not in session:
-#         return redirect(url_for('login'))
-#     # if not username:
-#     #     return jsonify({"error": "Username is required"}), 400
-#     username = session['username']
-#     coupons = UserCoupon.query.filter_by(user_id=username).all()
-#     # coupons = [c for c, in coupons]
-#     res = []
-#     for c in coupons:
-#         res.append([c.id, c.user_id, c.coupon_code, c.expiration_date])
-#
-#     return render_template('my_coupons.html', coupons=res)
 
 
 

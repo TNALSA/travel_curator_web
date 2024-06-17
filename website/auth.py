@@ -1,13 +1,11 @@
-from flask import Blueprint, redirect, render_template, request, flash, url_for, session
+from flask import Blueprint, redirect, render_template, request, flash, url_for, session, g
+import psycopg2
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from . import db
 
 auth = Blueprint('auth', __name__)
 
-''''''
-from flask import Flask, session, g
-import psycopg2
 DB_HOST = 'database-tour.cluster-ro-crln8mpfedqu.ap-northeast-2.rds.amazonaws.com'
 DB_NAME = 'postgres'
 DB_USER = 'postgres'
@@ -19,7 +17,7 @@ def get_db():
     if db is None:
         db = psycopg2.connect(host=DB_HOST, dbname=DB_NAME, user=DB_USER, password=DB_PASSWD, port=DB_PORT)
     return db
-''''''
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
