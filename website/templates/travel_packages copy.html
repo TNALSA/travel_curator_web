@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Travel Packages - Travel Qurator{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">Filter</h2>
+                <form method="GET" class="mb-4">
+                    <div class="form-group">
+                        <label for="start_date">Start Date</label>
+                        <input type="text" class="form-control datepicker" id="start_date" name="start_date" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="form-group">
+                        <label for="end_date">End Date</label>
+                        <input type="text" class="form-control datepicker" id="end_date" name="end_date" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select class="form-control" id="country" name="country">
+                            <option value="">All</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Scotland">Scotland</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Maldives">Maldives</option>
+                            <option value="France">France</option>
+                            <option value="India">India</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Italy">Italy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <select class="form-control" id="city" name="city">
+                            <option value="">All</option>
+                            <option value="Vancouver">Vancouver</option>
+                            <option value="Edinburgh">Edinburgh</option>
+                            <option value="Kyoto">Kyoto</option>
+                            <option value="Sydney">Sydney</option>
+                            <option value="Male">Male</option>
+                            <option value="Paris">Paris</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Kathmandu">Kathmandu</option>
+                            <option value="Rome">Rome</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="price_range">Price Range ($)</label>
+                        <input type="range" class="form-control-range" id="price_range" name="price_range" min="500" max="5000" step="100" oninput="this.nextElementSibling.value = this.value">
+                        <output>2500</output>
+                    </div>
+                    <div class="form-group">
+                        <label for="guide">Guide</label>
+                        <select class="form-control" id="guide" name="guide">
+                            <option value="">All</option>
+                            <option value="Y">Yes</option>
+                            <option value="N">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="people">People</label>
+                        <input type="number" class="form-control" id="people" name="people" min="1" max="10">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                    <button button id="btn-recommend" type="submit" class="btn btn-primary btn-block">Recommend</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <ul class="list-group">
+            {% for package in packages %}
+                <li class="list-group-item">
+                    <h5>{{ package.name }}</h5>
+                    <p>Country: {{ package.country }}</p>
+                    <p>City: {{ package.city }}</p>
+                    <p>Cost: {{ package.price }} USD</p>
+                    <p>Start Date: {{ package.start_date }}</p>
+                    <p>End Date: {{ package.end_date }}</p>
+                    <p>Guide: {{ package.guide }}</p>
+                    <p>People: {{ package.people }}</p>
+                    <p>Theme: {{ package.theme }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-4">
+                {% if prev_page %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ prev_page }}&{{ query_string }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for page_num in page_numbers %}
+                    <li class="page-item {% if page_num == page %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page_num }}&{{ query_string }}">{{ page_num }}</a>
+                    </li>
+                {% endfor %}
+                {% if next_page %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ next_page }}&{{ query_string }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+
+        $('#recommendButton').click(function() {
+            $.ajax({
+                url: '/recommend',
+                type: 'POST',
+                success: function(response) {
+                    let recommendations = '';
+                    response.recommendations.forEach(function(package) {
+                        recommendations += '<li class="list-group-item">' + package + '</li>';
+                    });
+                    $('#recommendations').html(recommendations);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+

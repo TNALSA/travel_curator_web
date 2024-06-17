@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Issue Coupon - Travel Qurator{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">진행 중인 이벤트 쿠폰</h2>
+                {% if coupon_list %}
+                    {% for cl in coupon_list %}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            {{ cl.title }}
+                        <!--  cl[1] : title   -->
+                        </div>
+                        <div>
+                            <!--  app.issue_coupon: Spring으로 REST 요청을 전송   -->
+                            <!--  views.issue_coupon: 쿠폰 발급 화면으로 전환 -->
+                            <form method="POST" action="{{ url_for('views.issues') }}" >
+                                <input type="hidden" name="coupon_id" id="coupon_id" value="{{ cl.id }}">
+                                <button type="submit" class="btn btn-primary btn-block">발급</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        발능 및 사용 기간 : {{ cl.date_issue_start }} 부터 ~ {{ cl.date_issue_end}} 까지
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-success mt-3" role="alert">
+                        현재 이벤트 중인 쿠폰이 존재하지 않습니다.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

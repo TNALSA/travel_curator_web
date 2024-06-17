@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Travel Qurator{% endblock %}
+{% block content %}
+<!-- <div class="image-wrap">
+    <img src="{{ url_for('static', filename='img/blog-img/3.jpg')}}" alt="" style="max-width: 100%; width: 100%; height: auto;">
+</div> -->
+    <!-- <style>background-image: url("{{ url_for('static', filename='img/blog-img/3.jpg')}}")
+    </style> -->
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='img/blog-img/3.jpg')}}");
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: 100% 100%;
+    }
+</style>
+<!-- <img src="{{ url_for('static', filename='img/blog-img/3.jpg')}}" alt="" style="max-width: 100%; width: 100%; height: auto;"> -->
+
+<div class="jumbotron mt-5">
+    <h1 class="display-4">Welcome to Travel Qurator!</h1>
+    {% if 'username' in session %}
+        <p class="lead">Hello, {{ session['username'] }}!</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('views.issue_coupon') }}" role="button">이벤트 페이지</a>
+        <a class="btn btn-info btn-lg" href="{{ url_for('views.travel_packages') }}" role="button">View Travel Packages</a>
+        <p></p>
+        <h3>진행중인 이벤트</h3>
+        <ul id="events" class="list-group"></ul>
+            <li class="list-group-item">
+                <h5>여름 휴가 동남아시아 패키지 3% 할인 쿠폰</h5>
+                <p>사용 조건 : 여름 방학 기간 출발, 도착 상품</p>
+                <p>발급 날짜 : 2024-06-01 ~ 소진시 까지</p>
+            </li>
+            <p></p>
+            <li class="list-group-item">
+                <h5>가족 여행 패키지 5% 할인 쿠폰</h5>
+                <p> 사용 조건 : 5인 이상 패키지 구매</p>
+                <p>발급 날짜 : 2024-06-01 ~ 소진시 까지</p>
+            </li>
+    {% else %}
+        <p class="lead">Hello, GUEST1!</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}" role="button">Login</a>
+        <a class="btn btn-info btn-lg" href="{{ url_for('views.travel_packages') }}" role="button">View Travel Packages</a>
+    {% endif %}
+</div>
+
+{% endblock %}
+

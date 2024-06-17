@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}My Coupons - Travel Qurator{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="{{ url_for('mypage_views.mypage') }}" class="list-group-item list-group-item-action active">My Info</a>
+            <a href="{{ url_for('mypage_views.my_coupons') }}" class="list-group-item list-group-item-action">My Coupons</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center">내 쿠폰 목록</h2>
+                {% if my_coupon_list %}
+                <ul class="list-group">
+                    {% for coupon in my_coupon_list  %}
+                        <li class="list-group-item">
+                            쿠폰명: {{ coupon.title }}<br>
+                            사용 기간: ~ {{ coupon.date_issue_end }} 까지
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

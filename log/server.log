@@ -1,0 +1,16 @@
+{'timestamp' : '2024-06-02 02:34:52', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'start_date': '2024-06-12', 'end_date': '2024-06-04', 'country': 'Canada', 'city': 'Vancouver', 'price_range': '4400', 'guide': 'Y', 'people': '2'}}}
+{'timestamp' : '2024-06-02 02:34:57', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'start_date': '2024-06-20', 'end_date': '2024-06-12', 'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:35:06', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'start_date': '2024-06-11', 'country': 'Japan', 'price_range': '4000', 'guide': 'N', 'people': '10'}}}
+{'timestamp' : '2024-06-02 02:35:12', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'end_date': '2024-06-29', 'country': 'Scotland', 'price_range': '1100'}}}
+{'timestamp' : '2024-06-02 02:56:38', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'end_date': '2024-06-29', 'country': 'Scotland', 'price_range': '1100'}}}
+{'timestamp' : '2024-06-02 02:56:45', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {}}}
+{'timestamp' : '2024-06-02 02:56:53', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'country': 'Maldives', 'city': 'Paris', 'price_range': '3900'}}}
+{'timestamp' : '2024-06-02 02:56:57', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'city': 'Kyoto', 'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:57:00', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:57:07', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:59:26', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:59:30', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'country': 'Japan', 'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:59:35', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:59:40', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'country': 'Canada', 'price_range': '2800'}}}
+{'timestamp' : '2024-06-02 02:59:52', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {}}}
+{'timestamp' : '2024-06-02 02:59:56', 'level' : 'INFO', 'message' : {'user' : 'user1', 'params' : {'price_range': '2800'}}}
