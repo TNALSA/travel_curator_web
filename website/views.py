@@ -57,6 +57,8 @@ def issue_coupon():
         return redirect(url_for('auth.login'))
     username = session['username']
 
+    message = request.args.get('message')
+
     conn = get_db()
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
@@ -90,7 +92,10 @@ def issue_coupon():
         cursor.close()
         conn.close()
 
-    return render_template('issue_coupon.html', coupon_list=coupon_list)
+    if message :
+        return render_template('issue_coupon.html', coupon_list=coupon_list, message = message)
+    else:
+        return render_template('issue_coupon.html', coupon_list=coupon_list)
 
 
 @views.route('/issues', methods=['GET','POST'])
@@ -120,10 +125,7 @@ def issues():
         print("isSuccess: "+ str(isSuccess))
         print("comment: "+str(comment))
 
-        if isSuccess == True:
-            return redirect(url_for('views.issue_coupon', message = "쿠폰 발급이 완료되었습니다."))
-        else:
-            return redirect(url_for('views.issue_coupon', message = "이미 발급된 쿠폰입니다."))
+        return redirect(url_for('views.issue_coupon', message = str(comment)))
 
 
 @views.route('/travel_packages', methods=['GET'])
