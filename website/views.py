@@ -113,7 +113,12 @@ def issues():
         }
 
         response = requests.post('http://172.18.0.3:7070/v2/issue-async', json=data)
+
         isSuccess = response.json().get('isSuccess')
+        comment = response.json().get('comment')
+
+        print("isSuccess: "+ str(isSuccess))
+        print("comment: "+str(comment))
 
         if isSuccess == True:
             return redirect(url_for('views.issue_coupon', message = "쿠폰 발급이 완료되었습니다."))
